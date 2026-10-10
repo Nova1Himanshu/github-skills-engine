@@ -1,8 +1,45 @@
 {
-  "generated_at": null,
-  "sources": [],
-  "files": [],
+  "generated_at": "2026-10-10T18:14:31.586966+00:00",
+  "sources": [
+    {
+      "repo": "agentskills/agentskills",
+      "ref": "main",
+      "purpose": "Agent Skills format specification",
+      "url": "https://github.com/agentskills/agentskills",
+      "license_spdx_id": "Apache-2.0",
+      "default_branch": "main",
+      "selected_files": 2
+    }
+  ],
+  "files": [
+    {
+      "repo": "agentskills/agentskills",
+      "path": "README.md",
+      "ref": "main",
+      "source_url": "https://github.com/agentskills/agentskills/blob/main/README.md",
+      "raw_url": "https://raw.githubusercontent.com/agentskills/agentskills/main/README.md",
+      "kind": "draft-reference",
+      "license_spdx_id": "Apache-2.0",
+      "sha256": "7ff4a9a612ab21189aa793fd43223bd854280a122ac12ce29f5bea84d5930a1d",
+      "output_path": "library/drafts/agentskills__agentskills__readme.md.md",
+      "bytes_saved": 4010
+    },
+    {
+      "repo": "agentskills/agentskills",
+      "path": "CONTRIBUTING.md",
+      "ref": "main",
+      "source_url": "https://github.com/agentskills/agentskills/blob/main/CONTRIBUTING.md",
+      "raw_url": "https://raw.githubusercontent.com/agentskills/agentskills/main/CONTRIBUTING.md",
+      "kind": "draft-reference",
+      "license_spdx_id": "Apache-2.0",
+      "sha256": "a8faf08b23696760d5682145c8746dfc0dbd8ca065c7f506eb80f9fb8e13155b",
+      "output_path": "library/drafts/agentskills__agentskills__contributing.md.md",
+      "bytes_saved": 6680
+    }
+  ],
   "notes": [
-    "Run scripts/sync_repositories.py to populate this manifest."
+    "Imported content is untrusted; review before use.",
+    "No source code or scripts are executed by this pipeline.",
+    "Repository license metadata may not cover all files; inspect file-level notices."
   ]
 }
