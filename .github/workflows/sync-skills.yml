@@ -1,0 +1,42 @@
+name: Sync skills
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 7 * * 1"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Discover and import source files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/sync_repositories.py
+
+      - name: Create review pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/skill-sync
+          delete-branch: true
+          title: "chore: sync GitHub skill sources"
+          commit-message: "chore: sync GitHub skill sources"
+          body: |
+            Automated discovery run. Review imported content, source licenses,
+            and instructions before merging. This workflow does not execute imported scripts.
