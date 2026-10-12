@@ -1,0 +1,55 @@
+name: Prepare ChatGPT skill packets
+
+on:
+  workflow_dispatch:
+    inputs:
+      packet_limit:
+        description: "Maximum source drafts to prepare (1-5)"
+        required: true
+        default: "5"
+        type: choice
+        options:
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate the local scripts and curated skills
+        run: |
+          python -m py_compile scripts/prepare_chatgpt_packets.py scripts/validate_library.py
+          python scripts/validate_library.py
+
+      - name: Prepare manual ChatGPT prompt packets (no API calls)
+        env:
+          PACKET_LIMIT: ${{ inputs.packet_limit }}
+        run: python scripts/prepare_chatgpt_packets.py
+
+      - name: Create review pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/manual-chatgpt-packets
+          delete-branch: true
+          title: "chore: prepare ChatGPT skill-generation packets"
+          commit-message: "chore: prepare ChatGPT skill-generation packets"
+          body: |
+            Offline prompt packets for manual use in ChatGPT Plus.
+            No model API was called and no API key or API credits are required.
+            Review source attribution and license information before using generated skill drafts.
