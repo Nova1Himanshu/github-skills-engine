@@ -15,4 +15,4 @@ If GitHub is available in ChatGPT's Apps/Connectors settings, connect only the r
 - ChatGPT Plus does not run this repository's scheduled pipeline; GitHub Actions does.
 - This repo does not automatically install files into ChatGPT.
 - Custom GPT creation availability can change by account and plan; do not depend on it.
-- OpenAI API use is separate from ChatGPT Plus and may incur separate charges.
+- The manual prompt-packet workflow does not use the OpenAI API and requires no API credits. Any separate API integrations you add later would use separate billing.
