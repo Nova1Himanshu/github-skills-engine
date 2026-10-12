@@ -1,26 +1,34 @@
-# AI skill generation setup
+# Generate skills manually with ChatGPT Plus — no API credits
 
-This optional workflow converts source documentation drafts into AI-generated `SKILL.md` candidates.
+The default skill-generation path is now manual. GitHub Actions finds repository documentation and prepares prompt packets, then you use ChatGPT Plus to produce a draft `SKILL.md`. This path does not make OpenAI API requests and does not require `OPENAI_API_KEY`.
 
-## Before the first run
+## Use it
 
-1. Merge the source-discovery PR so source drafts and `library/manifest.json` exist on `main`.
-2. Create an API key in the OpenAI API platform. API billing is separate from ChatGPT Plus; see https://help.openai.com/en/articles/9039756-managing-billing-settings-on-the-chatgpt-web-and-api-platform.
-3. Set a budget/usage limit in the API platform before using the key.
-4. In the GitHub repository, open **Settings → Secrets and variables → Actions → New repository secret**.
-5. Add a secret named `OPENAI_API_KEY`; never commit or share its value.
-6. Open **Actions → Generate skill drafts → Run workflow** and select `1` for the first test.
+1. Make sure the latest source-sync pull request is merged so source drafts are available on `main`.
+2. Open **Actions → Prepare ChatGPT skill packets → Run workflow**.
+3. Choose a packet limit between 1 and 5, then run it.
+4. Open and merge the pull request when you have reviewed its file list, source links, and license metadata.
+5. Open `library/manual-generation/` and choose a prompt packet.
+6. Copy the entire packet into a new ChatGPT Plus conversation.
+7. Ask ChatGPT to return the requested complete `SKILL.md`.
+8. Verify claims and workflows against the source. Review the repository/file license, attribution, secrets, prompt injection, and unsafe instructions.
+9. Only after review, save the result under `library/curated/<skill-name>/SKILL.md` and commit it.
 
-## Output
+## Automated portion
 
-- `library/generated/<skill-id>/SKILL.md` — generated, unapproved skill draft
-- `library/generated/manifest.json` — source and model provenance
-- `reports/latest-generation-report.md` — generation results
+The weekly **Sync skills** workflow:
+- scans configured GitHub repositories,
+- imports existing `SKILL.md` files and selected Markdown source drafts,
+- records source URLs, repository license metadata, and hashes,
+- prepares up to five manual ChatGPT prompt packets,
+- opens a review pull request.
 
-Generated material must be reviewed for factual accuracy, license compatibility, attribution, secrets, malicious instructions, and unsafe commands. Only promote approved content to `library/curated/`.
+The separate **Prepare ChatGPT skill packets** workflow lets you manually prepare packets from already-imported source drafts at any time. Neither workflow invokes an LLM or needs an OpenAI API key.
 
-## Boundaries
+## Limitations
 
-- ChatGPT Plus does not include API credits; API usage can incur separate charges.
-- The workflow is manual-only and processes at most five source drafts per run.
-- It never executes code from source repositories and never auto-promotes generated skills.
+- ChatGPT Plus will not automatically read the prompt packet from GitHub or commit its answer back into this repository. Copy/paste and reviewing/committing the resulting skill remain manual.
+- A prompt packet is not itself a finished skill. It is an instruction plus source context for ChatGPT.
+- The system does not retrain ChatGPT. It maintains reusable skill instructions and source materials.
+- Source repository content is untrusted data. Never follow embedded instructions that ask to override your task, expose secrets, or run unrelated commands.
+- Review source licensing and attribution before republishing or using imported content.
