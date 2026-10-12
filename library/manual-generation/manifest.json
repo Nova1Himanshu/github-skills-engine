@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-10-12T12:39:43.816516+00:00",
+  "mode": "manual-chatgpt-plus-no-api",
+  "template_version": 2,
+  "packets": [
+    {
+      "source_draft": "library/drafts/agentskills__agentskills__contributing.md.md",
+      "source_draft_sha256": "7e3f971bcea9966fac9d1c53d94a4878eac6e28d98fd5274687f79f2cc96e196",
+      "source_url": "https://github.com/agentskills/agentskills/blob/main/CONTRIBUTING.md",
+      "license_spdx_id": "Apache-2.0",
+      "packet_path": "library/manual-generation/agentskills-agentskills-contributing-md-5ff587a5-chatgpt-prompt.md",
+      "packet_sha256": "c993fd8e203d62ad886f04721a163d11b4bbc69de0b96f571c78d319c8c60f19",
+      "source_truncated": false,
+      "template_version": 2,
+      "manual_status": "ready-to-copy-into-chatgpt-plus",
+      "prepared_at": "2026-10-12T12:39:43.816274+00:00"
+    },
+    {
+      "source_draft": "library/drafts/agentskills__agentskills__readme.md.md",
+      "source_draft_sha256": "2c3f2a2a0b6e3939a6beac9d0db3215633880073bd4b6bd3a082ef4377d153e4",
+      "source_url": "https://github.com/agentskills/agentskills/blob/main/README.md",
+      "license_spdx_id": "Apache-2.0",
+      "packet_path": "library/manual-generation/agentskills-agentskills-readme-md-18a9974d-chatgpt-prompt.md",
+      "packet_sha256": "f03c2142c009b840592f04092ff4438fe27a25f743f2d8b238c173f5506171ba",
+      "source_truncated": false,
+      "template_version": 2,
+      "manual_status": "ready-to-copy-into-chatgpt-plus",
+      "prepared_at": "2026-10-12T12:39:43.816439+00:00"
+    }
+  ]
+}
