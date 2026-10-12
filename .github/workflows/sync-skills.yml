@@ -26,13 +26,18 @@ jobs:
 
       - name: Validate Python and skill library
         run: |
-          python -m py_compile scripts/sync_repositories.py scripts/validate_library.py
+          python -m py_compile scripts/sync_repositories.py scripts/prepare_chatgpt_packets.py scripts/validate_library.py
           python scripts/validate_library.py
 
       - name: Discover and import source files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/sync_repositories.py
+
+      - name: Prepare ChatGPT Plus prompt packets without an API
+        env:
+          PACKET_LIMIT: "5"
+        run: python scripts/prepare_chatgpt_packets.py
 
       - name: Create review pull request
         uses: peter-evans/create-pull-request@v6
@@ -43,5 +48,5 @@ jobs:
           title: "chore: sync GitHub skill sources"
           commit-message: "chore: sync GitHub skill sources"
           body: |
-            Automated discovery run. Review imported content, source licenses,
-            and instructions before merging. This workflow does not execute imported scripts.
+            Automated discovery plus offline ChatGPT prompt-packet preparation.
+            No model API is called. Review source licenses and imported instructions before merging.
