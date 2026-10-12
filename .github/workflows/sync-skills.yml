@@ -2,6 +2,14 @@ name: Sync skills
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "config/sources.json"
+      - "scripts/sync_repositories.py"
+      - "scripts/prepare_chatgpt_packets.py"
+      - ".github/workflows/sync-skills.yml"
   schedule:
     - cron: "23 7 * * 1"
 
