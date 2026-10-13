@@ -9,6 +9,8 @@ on:
       - "config/sources.json"
       - "scripts/sync_repositories.py"
       - "scripts/prepare_chatgpt_packets.py"
+      - "scripts/validate_sync.py"
+      - "tests/test_validate_sync.py"
       - ".github/workflows/sync-skills.yml"
   schedule:
     - cron: "23 7 * * 1"
@@ -34,13 +36,17 @@ jobs:
 
       - name: Validate Python and skill library
         run: |
-          python -m py_compile scripts/sync_repositories.py scripts/prepare_chatgpt_packets.py scripts/validate_library.py
+          python -m py_compile scripts/sync_repositories.py scripts/prepare_chatgpt_packets.py scripts/validate_library.py scripts/validate_sync.py
+          python -m unittest discover -s tests -p "test_validate_sync.py"
           python scripts/validate_library.py
 
       - name: Discover and import source files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/sync_repositories.py
+
+      - name: Validate completed sync
+        run: python scripts/validate_sync.py
 
       - name: Prepare ChatGPT Plus prompt packets without an API
         env:

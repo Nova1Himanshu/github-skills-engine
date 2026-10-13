@@ -50,7 +50,9 @@ def get_json(url: str) -> dict:
 def get_text(url: str, max_bytes: int) -> tuple[bytes, str]:
     response = SESSION.get(url, timeout=30)
     response.raise_for_status()
-    return response.content[:max_bytes], response.url
+    if len(response.content) > max_bytes:
+        raise requests.RequestException(f"Download exceeds max_file_bytes ({max_bytes}); refusing partial content")
+    return response.content, response.url
 
 
 def digest(data: bytes) -> str:
@@ -95,6 +97,8 @@ def main() -> int:
             if tree.get("truncated"):
                 report.append("- WARNING: the GitHub tree response was truncated.")
             entries = [entry for entry in tree.get("tree", []) if entry.get("type") == "blob"]
+            if len(entries) > max_files:
+                report.append(f"- ERROR: discovery capped at {max_files} of {len(entries)} blob entries.")
             entries = entries[:max_files]
 
             selected = []
@@ -114,6 +118,8 @@ def main() -> int:
                 1 if item["path"].lower().endswith("readme.md") else 2,
                 item["path"].lower()
             ))
+            if len(selected) > 80:
+                report.append(f"- ERROR: selection capped at 80 of {len(selected)} Markdown files.")
             selected = selected[:80]
             license_id = (meta.get("license") or {}).get("spdx_id")
             sources_out.append({
@@ -171,7 +177,7 @@ def main() -> int:
                         "## Retrieved source content (review before use)\n\n"
                         f"{original}\n"
                     )
-                out_path.write_text(source_header + body, encoding="utf-8")
+                out_path.write_bytes((source_header + body).encode("utf-8"))
                 files_out.append({
                     "repo": repo,
                     "path": path,
