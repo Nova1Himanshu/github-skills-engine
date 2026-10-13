@@ -38,7 +38,7 @@ def validate(root: Path) -> None:
             elif line.startswith("- Selected Markdown files: "):
                 current["selected"] = int(line.rsplit(" ", 1)[1])
             elif line.startswith(("- Imported skill:", "- Draft reference:")):
-                match = re.fullmatch(r"- (Imported skill|Draft reference): `([^`]+)`  `([^`]+)`", line)
+                match = re.fullmatch(r"- (Imported skill|Draft reference): `([^`]+)` \u2192 `([^`]+)`", line)
                 if not match:
                     raise ValueError("Malformed report file entry")
                 label, path, output = match.groups()
