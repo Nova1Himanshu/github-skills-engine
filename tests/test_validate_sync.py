@@ -26,7 +26,7 @@ class ValidateSyncTests(unittest.TestCase):
         self.manifest = {"sources": [{"repo": "owner/repo", "ref": "main", "selected_files": 1}],
                          "files": [{"repo": "owner/repo", "ref": "main", "path": "SKILL.md", "kind": "skill",
                                     "output_path": "library/imported/skill.md", "bytes_saved": 14}]}
-        self.report = "## owner/repo\n- Ref: main\n- Selected Markdown files: 1\n- Imported skill: `SKILL.md`  `library/imported/skill.md`\n"
+        self.report = "## owner/repo\n- Ref: main\n- Selected Markdown files: 1\n- Imported skill: `SKILL.md` \u2192 `library/imported/skill.md`\n"
 
     def check(self):
         (self.root / "config/sources.json").write_text(json.dumps(self.config), encoding="utf-8")
