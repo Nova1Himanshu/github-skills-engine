@@ -9,7 +9,12 @@ File: `library/curated/website-design/SKILL.md`
 
 Use for clarifying audience and goals, page structure, visual direction, typography, colors, responsive behavior, accessibility, and website quality review.
 
-### Frontend development
+#### Video production and editing
+File: `library/curated/video-production/SKILL.md`
+
+Use for video concepts, scripts, storyboards, shot lists, captions, editing plans, local rendering, export troubleshooting, and quality checks. The skill must verify which editing/rendering tools are actually available and request approval before paid services, installs, publishing, uploads, or destructive changes.
+
+## Frontend development
 File: `library/curated/frontend-development/SKILL.md`
 
 Use for implementing or improving HTML, CSS, JavaScript, TypeScript, React, Next.js, frontend components, responsiveness, debugging, and testing.

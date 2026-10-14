@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "description": "Machine-readable index of reviewed skills in the GitHub Skills Engine. This registry describes skills; it does not install or activate them.",
+  "skills": [
+    {
+      "id": "video-production",
+      "path": "library/curated/video-production/SKILL.md",
+      "name": "video-production",
+      "description": "Plan, create, edit, render, and quality-check short-form or long-form videos using available local tools.",
+      "targets": ["codex", "chatgpt"],
+      "triggers": ["video", "video editing", "storyboard", "video script", "captions", "render", "FFmpeg", "short-form video", "YouTube video"],
+      "tools": ["local-editor-if-available", "ffmpeg-if-installed", "approved-media-generation-tools-if-available"],
+      "verification": ["check-output-exists", "inspect-duration-and-resolution", "check-audio-and-captions", "report-unverified-checks"],
+      "requires_human_approval_for": ["paid_services", "publishing", "uploading", "overwriting_or_deleting_assets", "new_tool_installation"]
+    }
+  ],
+  "policy": {
+    "unknown_tools_must_not_be_claimed_available": true,
+    "skills_are_instructions_not_automatic_installers": true,
+    "human_review_required_before_promotion_or_external_side_effects": true,
+    "no_paid_api_calls_without_explicit_approval": true
+  }
+}
